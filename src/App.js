@@ -14,6 +14,12 @@ function App() {
     const ref = useRef(null);
     const [position, setPosition] = React.useState(Cartesian3.fromDegrees(151.2093, -33.8688, 2000.0))
     const [snailTrail, setSnailTrail] = React.useState([])
+    React.useEffect(() => {
+        console.log(ref.current)
+        ref.current.cesiumElement.animation.container.style.visibility = 'hidden';
+        ref.current.cesiumElement.timeline.container.style.visibility = 'hidden';
+        ref.current.cesiumElement.forceResize();
+    }, [])
     useInterval(() => {
         const getISSPosition = async () => {
             const response = await fetch('https://api.wheretheiss.at/v1/satellites/25544')
@@ -27,7 +33,7 @@ function App() {
     }, 5000)
 
     return (
-        <Viewer ref={ref} style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}>
+        <Viewer ref={ref} style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}} baseLayerPicker={false}>
             <Entity position={position}>
                 <ModelGraphics uri={"/banana.gltf"} minimumPixelSize={200} maximumPixelSize={500}/>
             </Entity>
