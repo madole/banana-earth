@@ -16,6 +16,8 @@ const TERRAIN_PROVIDER = new CesiumTerrainProvider({
     url: IonResource.fromAssetId(1),
 })
 
+const userAgent = navigator.userAgent.toLowerCase()
+
 function App() {
     const ref = useRef(null);
     const [position, setPosition] = React.useState(Cartesian3.fromDegrees(151.2093, -33.8688, 2000.0))
@@ -24,7 +26,7 @@ function App() {
         console.log(ref.current)
         ref.current.cesiumElement.animation.container.style.visibility = 'hidden';
         ref.current.cesiumElement.timeline.container.style.visibility = 'hidden';
-        ref.current.cesiumElement.scene.globe.enableLighting = true;
+        ref.current.cesiumElement.scene.globe.enableLighting = !userAgent.includes('android');
         ref.current.cesiumElement.forceResize();
     }, [])
     useInterval(() => {
