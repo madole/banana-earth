@@ -2,8 +2,10 @@ import * as React from 'react';
 import {useRef} from 'react';
 import {Entity, ModelGraphics, Polyline, PolylineCollection, Viewer} from 'resium'
 import './App.css';
-import {Cartesian3, Color, Material} from 'cesium'
+import {Cartesian3, Color, Ion, Material} from 'cesium'
 import {useInterval} from "./useInterval";
+
+Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjMjk3OGRkNS0zZTZjLTQyZGYtYjAzNy1lYTk5NmY3NDkyZTMiLCJpZCI6MzMxMzksInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1OTgwNjc1ODh9.KjJzjblyvrJlF0WkZZznyR6FXfNZY432yc19DtT1Ozc'
 
 const GLOW_MATERIAL = Material.fromType(Material.PolylineGlowType, {
     glowPower: 0.1,
