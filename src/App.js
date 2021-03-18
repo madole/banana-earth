@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useRef} from 'react';
 import {Entity, ModelGraphics, Polyline, PolylineCollection, Viewer} from 'resium'
 import './App.css';
-import {Cartesian3, Color, Ion, Material} from 'cesium'
+import {Cartesian3, CesiumTerrainProvider, Color, Ion, IonResource, Material} from 'cesium'
 import {useInterval} from "./useInterval";
 
 Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjMjk3OGRkNS0zZTZjLTQyZGYtYjAzNy1lYTk5NmY3NDkyZTMiLCJpZCI6MzMxMzksInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1OTgwNjc1ODh9.KjJzjblyvrJlF0WkZZznyR6FXfNZY432yc19DtT1Ozc'
@@ -11,6 +11,10 @@ const GLOW_MATERIAL = Material.fromType(Material.PolylineGlowType, {
     glowPower: 0.1,
     color: new Color(1.0, 0.5, 0.0, 1.0)
 });
+
+const TERRAIN_PROVIDER = new CesiumTerrainProvider({
+    url: IonResource.fromAssetId(1),
+})
 
 function App() {
     const ref = useRef(null);
@@ -35,7 +39,8 @@ function App() {
     }, 5000)
 
     return (
-        <Viewer ref={ref} style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}} baseLayerPicker={false}>
+        <Viewer ref={ref} style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}} baseLayerPicker={false}
+                terrainProvider={TERRAIN_PROVIDER}>
             <Entity position={position}>
                 <ModelGraphics uri={"/banana.gltf"} minimumPixelSize={200} maximumPixelSize={500}/>
             </Entity>
