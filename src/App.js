@@ -24,6 +24,7 @@ function App() {
         console.log(ref.current)
         ref.current.cesiumElement.animation.container.style.visibility = 'hidden';
         ref.current.cesiumElement.timeline.container.style.visibility = 'hidden';
+        ref.current.cesiumElement.scene.globe.enableLighting = true;
         ref.current.cesiumElement.forceResize();
     }, [])
     useInterval(() => {
